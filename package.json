@@ -1,0 +1,10 @@
+{
+  "name": "WebSocktTest",
+  "version": "1.0.0",
+  "repository": "https://github.com/inswave/WebSocktTest.git",
+  "author": "maninzoo <maninzoo@inswave.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^1.1.1"
+  }
+}

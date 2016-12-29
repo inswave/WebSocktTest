@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>WebSocket SSL Test</title>
+</head>
+<body>
+  <div style="margin-top: 1rem;">
+    <input type="button" id="connectServer" value="connect Server"/>
+    <input type="button" id="sendMessage" title="sendMessage" value="send Message"/>
+  </div>
+  <script type="text/javascript">
+    var ws,
+        wsPort = 3000;
+
+    function addEvent() {
+      document.addEventListener( 'click', function(e) {
+        var target = e.target || e.srcElement;
+
+        if ( target.id === 'connectServer' ) {
+          ws = new WebSocket( "ws://127.0.0.1:" + wsPort );
+        } else if ( target.id === 'sendMessage' ) {
+          if ( ws.readyState === WebSocket.OPEN ) {
+            var msg = { nick: 'maninzoo', content: 'test' };
+            ws.send( JSON.stringify( msg ) );
+          }
+        }
+
+        ws.onopen = function ( ) {
+          console.log( 'Connection to server opened : ' + wsPort );
+        };
+
+        ws.onmessage = function ( e ) {
+          var msg = JSON.parse( e.data );
+          console.log( 'received ' + JSON.stringify( msg ) );
+        }
+      } );
+    }
+
+    document.addEventListener( "DOMContentLoaded", function() {
+      addEvent();
+    } );
+  </script>
+</body>
+</html>
